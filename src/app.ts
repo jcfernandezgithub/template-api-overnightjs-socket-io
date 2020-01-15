@@ -4,7 +4,6 @@ import SocketIO from 'socket.io';
 import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
-import path from 'path';
 import http from 'http';
 
 export default class App extends Server {
@@ -26,7 +25,7 @@ export default class App extends Server {
 		let router = new Router();
 		super.addControllers([
 			router.authController,
-		])
+		]);
 	}
 
 	private mongoConnection() {
