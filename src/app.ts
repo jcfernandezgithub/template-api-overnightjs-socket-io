@@ -17,6 +17,9 @@ export default class App extends Server {
 		this.app.use(cors());
 		this.app.use(router);
 		this.app.use(express.static(path.join(__dirname, 'www')));
+
+		this.mongoConnection();
+		this.setupControllers();
 	}
 
 	public init() {
@@ -34,5 +37,13 @@ export default class App extends Server {
 			console.log('New Socket has been connected');
 		});
 	}
-	
+
+	private setupControllers() {
+		console.log('Loading Controllers');
+	}
+
+	private mongoConnection() {
+		console.log('Connection mongo database...');
+	}
+
 }
