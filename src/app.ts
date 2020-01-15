@@ -1,7 +1,9 @@
-import router from './routes/router';
 import { Server } from '@overnightjs/core';
+import router from './routes/router';
 import SocketIO from 'socket.io';
 import express from 'express';
+import morgan from 'morgan';
+import cors from 'cors';
 import path from 'path';
 import http from 'http';
 
@@ -11,7 +13,9 @@ export default class App extends Server {
 
 	constructor() {
 		super();
-		this.app.use(router)
+		this.app.use(morgan('dev'));
+		this.app.use(cors());
+		this.app.use(router);
 		this.app.use(express.static(path.join(__dirname, 'www')));
 	}
 
@@ -27,7 +31,8 @@ export default class App extends Server {
 		const io = SocketIO(this.close);
 
 		io.on('connection', (socket: SocketIO.Socket) => {
-			console.log('user connected');
+			console.log('New Socket has been connected');
 		});
 	}
+	
 }
